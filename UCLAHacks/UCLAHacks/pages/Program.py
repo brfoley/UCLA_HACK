@@ -69,7 +69,14 @@ class AIState(rx.State):
         ]
 
         response = model.generate_content(prompt_parts)
-        print(response.text)
+        
+        workout_plan = json.loads(response.text)
+        # Write the JSON response to a file
+        # with open('../UCLAHacks/UCLAHacks/output.json', 'w') as f:
+        #     json.dump(workout_plan, f, indent=4)
+
+        # print("JSON response has been written to output.json file.")
+        print(workout_plan)
 
 
 @template(route="/Program", title="Program")
