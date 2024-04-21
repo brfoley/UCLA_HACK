@@ -35,9 +35,9 @@ class CamState(rx.State):
             self.last_screenshot.load()
             filename = "Person.jpeg"
             # convert to webp during serialization for smaller size
-            self.last_screenshot.save("/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/pages/humanPose/Pics/"+filename, "JPEG")  # type: ignore
+            self.last_screenshot.save("../UCLAHacks/UCLAHacks/pages/humanPose/Pics/"+filename, "JPEG")  # type: ignore
             
-            subprocess.run(["/Users/brandonfoley/Documents/UCLAHacks/.venv/bin/python3", "/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/pages/humanPose/lahackstest.py"])
+            subprocess.run(["../UCLAHacks/.venv/bin/python3", "../UCLAHacks/UCLAHacks/pages/humanPose/lahackstest.py"])
 
 
 def last_screenshot_widget() -> rx.Component:

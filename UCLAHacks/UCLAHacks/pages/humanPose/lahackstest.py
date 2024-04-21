@@ -18,7 +18,7 @@ height = 368
 inWidth = width
 inHeight = height
 
-net = cv.dnn.readNetFromTensorflow("/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/pages/humanPose/graph_opt.pb")
+net = cv.dnn.readNetFromTensorflow("../UCLAHacks/UCLAHacks/pages/humanPose/graph_opt.pb")
 thr = 0.2
 
 def poseDetector(frame):
@@ -98,7 +98,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 # Define the path to your image file
-image_path = '/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/pages/humanPose/Pics/Person.jpeg'  # Adjust the path accordingly if the image is in a different folder
+image_path = '../UCLAHacks/UCLAHacks/pages/humanPose/Pics/Person.jpeg'  # Adjust the path accordingly if the image is in a different folder
 
 # Open and display the image
 img = mpimg.imread(image_path)
@@ -155,12 +155,12 @@ def clear_csv(filename):
         pass
 
 # Example usage
-clear_csv('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.csv')
-write_to_csv('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.csv', "RightShoulder", Rshoulder_x, Rshoulder_y)
-write_to_csv('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.csv', "LeftShoulder", Lshoulder_x, Lshoulder_y)
+clear_csv('../UCLAHacks/UCLAHacks/data.csv')
+write_to_csv('../UCLAHacks/UCLAHacks/data.csv', "RightShoulder", Rshoulder_x, Rshoulder_y)
+write_to_csv('../UCLAHacks/UCLAHacks/data.csv', "LeftShoulder", Lshoulder_x, Lshoulder_y)
 if points[BODY_PARTS["LHip"]] is not None:
-  write_to_csv('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.csv', "RightHip", RHip_x, RHip_y)
-  write_to_csv('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.csv', "LeftHip", LHip_x, LHip_y)
+  write_to_csv('../UCLAHacks/UCLAHacks/data.csv', "RightHip", RHip_x, RHip_y)
+  write_to_csv('../UCLAHacks/UCLAHacks/data.csv', "LeftHip", LHip_x, LHip_y)
 
 
 

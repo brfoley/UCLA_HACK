@@ -62,7 +62,7 @@ class InputState(rx.State):
         left_hip_x = None
 
         # Open the CSV file and read its contents
-        with open('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.csv', mode='r') as file:
+        with open('../UCLAHacks/UCLAHacks/data.csv', mode='r') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 # Check the dataPoint and assign values accordingly
@@ -99,7 +99,7 @@ class InputState(rx.State):
         json_string = json.dumps(data, indent=4)
         
         # Write JSON string to a file
-        with open('/Users/brandonfoley/Documents/UCLAHacks/UCLAHacks/data.json', 'w') as json_file:
+        with open('../UCLAHacks/UCLAHacks/data.json', 'w') as json_file:
             json_file.write(json_string)
         
 
