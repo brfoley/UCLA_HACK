@@ -199,7 +199,7 @@ def scanner() -> rx.Component:
             "Submit",
             style = button_style(False),
             #color_scheme="green",
-            on_click=[InputState.convertToJson, rx.window_alert(f"Saving Data: Height - {InputState.height}, Weight - {InputState.weight}, Age - {InputState.age}, Sex - {InputState.sex}"), rx.redirect("/")]
+            on_click=[InputState.convertToJson, rx.window_alert(f"Saving Data: Height - {InputState.height}, Weight - {InputState.weight}, Age - {InputState.age}, Sex - {InputState.sex}"), rx.redirect("/Program")]
         )
     )
 
