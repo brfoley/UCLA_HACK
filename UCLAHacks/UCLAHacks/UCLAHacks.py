@@ -10,7 +10,12 @@ class State(rx.State):
     """Define empty state to allow access to rx.State.router."""
 
 # Create the app.
-app = rx.App()
+app = rx.App(
+     theme=rx.theme(
+        appearance="dark")
+)
+    
+    
 
 # Add pages to the app
 
