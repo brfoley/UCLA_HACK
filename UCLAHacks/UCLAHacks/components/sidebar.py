@@ -112,7 +112,7 @@ def sidebar() -> rx.Component:
     pages = get_decorated_pages()
 
     # Optionally filter out pages, e.g., exclude the camera page
-    # filtered_pages = [page for page in pages if page["route"] != "/camera"]
+    filtered_pages = [page for page in pages if page["route"] != "/camera"]
 
     return rx.box(
         rx.vstack(
@@ -124,7 +124,7 @@ def sidebar() -> rx.Component:
                         text=customize_page_title(page),
                         url=page["route"],
                     )
-                    for page in pages  # Use the filtered list
+                    for page in filtered_pages  # Use the filtered list
                 ],
                 width="100%",
                 overflow_y="auto",  # Allows scrolling within the sidebar
