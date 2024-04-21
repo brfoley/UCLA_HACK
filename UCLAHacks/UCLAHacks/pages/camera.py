@@ -73,7 +73,7 @@ def webcam_upload_component(ref: str) -> rx.Component:
     return rx.vstack(
         webcam.webcam(
             id=ref,
-            on_click=[CamState.prepare_capture, webcam.upload_screenshot(ref=ref, handler=CamState.handle_screenshot), rx.redirect("/scanner")],  # type: ignore
+            on_click=[CamState.prepare_capture, rx.redirect("/scanner")],
         ),
         rx.box(
             border_radius="5px", 
