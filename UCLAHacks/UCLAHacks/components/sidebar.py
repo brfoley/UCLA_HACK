@@ -5,6 +5,7 @@ from UCLAHacks import styles
 import reflex as rx
 
 
+
 def sidebar_header() -> rx.Component:
     """Sidebar header.
 
@@ -103,39 +104,47 @@ def sidebar_item(text: str, url: str) -> rx.Component:
     )
 
 
-def sidebar() -> rx.Component:
-    """The sidebar.
+from reflex.page import get_decorated_pages
 
-    Returns:
-        The sidebar component.
-    """
-    # Get all the decorated pages and add them to the sidebar.
-    from reflex.page import get_decorated_pages
+def sidebar() -> rx.Component:
+    """Constructs the sidebar component with filtered pages."""
+    # Get all the decorated pages
+    pages = get_decorated_pages()
+
+    # Optionally filter out pages, e.g., exclude the camera page
+    filtered_pages = [page for page in pages if page["route"] != "/camera"]
 
     return rx.box(
         rx.vstack(
-            sidebar_header(),
+            sidebar_header(),  # The top part of the sidebar
             rx.vstack(
                 *[
                     sidebar_item(
-                        text=page.get("title", page["route"].strip("/").capitalize()),
+                        # Customize text appearance or add conditions
+                        text=customize_page_title(page),
                         url=page["route"],
                     )
-                    for page in get_decorated_pages()
+                    for page in filtered_pages  # Use the filtered list
                 ],
                 width="100%",
-                overflow_y="auto",
-                align_items="flex-start",
+                overflow_y="auto",  # Allows scrolling within the sidebar
+                align_items="flex-start",  # Align items to the start of the flex axis
                 padding="1em",
             ),
-            rx.spacer(),
-            sidebar_footer(),
+            rx.spacer(),  # Adds space between items
+            sidebar_footer(),  # The bottom part of the sidebar
             height="100dvh",
         ),
-        display=["none", "none", "block"],
+        display=["none", "none", "block"],  # Responsive visibility settings
         min_width=styles.sidebar_width,
         height="100%",
         position="sticky",
         top="0px",
         border_right=styles.border,
     )
+
+def customize_page_title(page) -> str:
+    """Customizes the page title based on specific logic."""
+    # Example: Capitalize each word and prepend 'Menu: '
+    title = page.get("title", page["route"].strip("/").capitalize())
+    return title.replace("_", " ").title()
