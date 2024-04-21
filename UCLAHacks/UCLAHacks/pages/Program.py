@@ -1,3 +1,8 @@
+from UCLAHacks.templates import ThemeState, template
+
+import reflex as rx
+
+import subprocess
 import google.generativeai as genai
 GOOGLE_API_KEY = "AIzaSyAFPS-aQ5MN58IEk5Y8sDmqbAtT7mRu3Hc"
 
@@ -10,8 +15,6 @@ def Generate_Prompt():
     """
 
     from pathlib import Path
-
-    import google.generativeai as genai
 
     genai.configure(api_key=GOOGLE_API_KEY)
 
@@ -62,5 +65,15 @@ def Generate_Prompt():
 
     response = model.generate_content(prompt_parts)
     print(response.text)
-        
-Generate_Prompt()
+
+
+@template(route="/Program", title="Program")
+def Program() -> rx.Component:
+    # subprocess.run(["../UCLAHacks/.venv/bin/python3", "../UCLAHacks/UCLAHacks/pages/api_call_gemini.py"])
+    Generate_Prompt()
+    return rx.vstack(
+        rx.heading("AI Program", size="6", align="center", style={"width": "100%"}),
+        spacing="5",
+        style={"width": "100%"},
+        align="center"
+    )
