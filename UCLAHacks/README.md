@@ -27,16 +27,16 @@ Setup Instructions
 1. Clone the repository
    - git clone https://github.com/brfoley/UCLA_HACK.git
 3. Navigate to the project directory: cd UCLAHacks
-  - cd UCLAHacks
+   - cd UCLAHacks
 3. Install dependencies
-  - pip install reflex
-  - pip install reflex-webcam
-  - pip install matplotlib
-  - pip install opencv-python-headless
+   - pip install reflex
+   - pip install reflex-webcam
+   - pip install matplotlib
+   - pip install opencv-python-headless
 4. Activate Virtual Environment (Optional, if you use virtualenv)
-  - source .venv/bin/activate
+   - source .venv/bin/activate
 5. Start the Server
-  - reflex run
+   - reflex run
 
 **Usage Guide**
 1. Access the Website
