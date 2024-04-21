@@ -1,0 +1,153 @@
+[
+    {
+        "Day 1": {
+            "Muscle Groups": "Chest and Shoulders",
+            "Workout Type": "Hypertrophy focused",
+            "Exercises": [
+                {
+                    "Exercise Name": "Barbell Bench Press",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest Time": "2 minutes",
+                    "Intensity": "75% 1RM"
+                },
+                {
+                    "Exercise Name": "Incline Dumbbell Press",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest Time": "2 minutes",
+                    "Intensity": "75% 1RM"
+                },
+                {
+                    "Exercise Name": "Dumbbell Shoulder Press",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "70% 1RM"
+                },
+                {
+                    "Exercise Name": "Lateral Raises",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "70% 1RM"
+                }
+            ]
+        }
+    },
+    {
+        "Day 2": {
+            "Muscle Groups": "Arms",
+            "Workout Type": "Hypertrophy focused",
+            "Exercises": [
+                {
+                    "Exercise Name": "Barbell Bicep Curl",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "75% 1RM"
+                },
+                {
+                    "Exercise Name": "Hammer Curls",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "70% 1RM"
+                },
+                {
+                    "Exercise Name": "Tricep Pushdowns",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "75 seconds",
+                    "Intensity": "70% 1RM"
+                },
+                {
+                    "Exercise Name": "Overhead Tricep Extensions",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "75 seconds",
+                    "Intensity": "70% 1RM"
+                }
+            ]
+        }
+    },
+    {
+        "Day 3": {
+            "Muscle Groups": "Legs",
+            "Workout Type": "Hypertrophy focused",
+            "Exercises": [
+                {
+                    "Exercise Name": "Back Squat",
+                    "Sets": 3,
+                    "Reps": 8,
+                    "Rest Time": "3 minutes",
+                    "Intensity": "80% 1RM"
+                },
+                {
+                    "Exercise Name": "Romanian Deadlift",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest Time": "2 minutes",
+                    "Intensity": "75% 1RM"
+                },
+                {
+                    "Exercise Name": "Leg Press",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "70% 1RM"
+                },
+                {
+                    "Exercise Name": "Hamstring Curls",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "70% 1RM"
+                },
+                {
+                    "Exercise Name": "Calf Raises",
+                    "Sets": 3,
+                    "Reps": 15,
+                    "Rest Time": "60 seconds",
+                    "Intensity": "65% 1RM"
+                }
+            ]
+        }
+    },
+    {
+        "Day 4": {
+            "Muscle Groups": "Back",
+            "Workout Type": "Hypertrophy focused",
+            "Exercises": [
+                {
+                    "Exercise Name": "Pull-Ups",
+                    "Sets": 3,
+                    "Reps": "As Many Reps as Possible (AMRAP)",
+                    "Rest Time": "2 minutes",
+                    "Intensity": "Bodyweight"
+                },
+                {
+                    "Exercise Name": "Barbell Deadlift",
+                    "Sets": 1,
+                    "Reps": 5,
+                    "Rest Time": "3 minutes",
+                    "Intensity": "85% 1RM"
+                },
+                {
+                    "Exercise Name": "Seated Cable Rows",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "75% 1RM"
+                },
+                {
+                    "Exercise Name": "Lat Pulldowns",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest Time": "90 seconds",
+                    "Intensity": "70% 1RM"
+                }
+            ]
+        }
+    }
+]

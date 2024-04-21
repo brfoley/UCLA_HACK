@@ -1,6 +1,7 @@
 from UCLAHacks.templates import ThemeState, template
 
 import reflex as rx
+import pandas as pd
 import json
 
 import subprocess
@@ -8,8 +9,12 @@ import google.generativeai as genai
 GOOGLE_API_KEY = "AIzaSyAFPS-aQ5MN58IEk5Y8sDmqbAtT7mRu3Hc"
 
 class AIState(rx.State):
+    def generate_program(self):
+        workout_plan = self.Generate_Prompt()
+        with open('../UCLAHacks/UCLAHacks/output.json', 'w') as f:
+            json.dump(workout_plan, f, indent=4)
+    
     def Generate_Prompt(self):
-
         """
         At the command line, only need to run once to install the package via pip:
 
@@ -77,13 +82,49 @@ class AIState(rx.State):
 
         # print("JSON response has been written to output.json file.")
         print(workout_plan)
-
+        
+        return workout_plan
 
 @template(route="/Program", title="Program")
 def Program() -> rx.Component:
+    # Read the workout plan from the output.json file
+    with open('../UCLAHacks/UCLAHacks/output.json', 'r') as file:
+        workout_plan_list = json.load(file)
+    
+    # List to store the components for each day's workout plan
+    day_components = []
+    
+    # Convert the list of workout plans into DataFrames for each day
+    for workout_plan in workout_plan_list:
+        for day, details in workout_plan.items():
+            exercises = details['Exercises']
+            # Create a DataFrame for the exercises
+            df = pd.DataFrame(exercises)
+            # Create a table for the exercises
+            table = rx.data_table(
+                data=df,
+                pagination=True,
+                search=False,
+                sort=True
+            )
+            # Construct the title for the table (day and muscle group)
+            title = f"{day}: {details['Muscle Groups']}"
+            # Construct the component for this day's workout plan
+            day_component = rx.vstack(
+                rx.heading(title, size="5", align="center"),
+                table,
+                spacing="5",
+                style={"width": "100%"},
+                align="center",
+            )
+            # Append the day component to the list
+            day_components.append(day_component)
+    
+    # Return all the day components stacked vertically
     return rx.vstack(
         rx.heading("AI Program", size="6", align="center", style={"width": "100%"}),
-        rx.button("Generate Program", color_scheme="blue", on_click=AIState.Generate_Prompt),
+        rx.button("Generate Program", color_scheme="blue", on_click=AIState.generate_program),
+        *day_components,
         spacing="5",
         style={"width": "100%"},
         align="center",
