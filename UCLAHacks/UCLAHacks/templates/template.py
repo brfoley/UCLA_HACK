@@ -120,7 +120,7 @@ def template(
                 ),
                 menu_button(),
                 align="start",
-                background=f"radial-gradient(circle at top right, {rx.color('accent', 2)}, {rx.color('mauve', 1)});",
+                background=f"radial-gradient(circle at top right, {rx.color('accent', 5)}, {rx.color('mauve', 1)});",
                 position="relative",
             )
 

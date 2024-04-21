@@ -14,8 +14,8 @@ def sidebar_header() -> rx.Component:
     return rx.hstack(
         # The logo.
         rx.color_mode_cond(
-            rx.image(src="/reflex_black.svg", height="2em"),
-            rx.image(src="/reflex_white.svg", height="2em"),
+            rx.image(src="/Alara.png", height="4em"),
+            rx.image(src="/Alara_White.png", height="4em"),
         ),
         rx.spacer(),
         rx.link(

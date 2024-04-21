@@ -15,13 +15,20 @@ def introduction_text() -> rx.Component:
         align="center"
     )
 
+def place_image() -> rx.Component:
+    return rx.image(src="/AlaraLogo.png", height="28em", style={"flex-grow": "0"})
 
-@template(route="/", title="Dashboard")
+@template(route="/", title="Home")
 def index() -> rx.Component:
     return rx.vstack(
-        rx.heading("Dashboard", size="6", align="center", style={"width": "100%"}),
+        rx.hstack(
+            rx.heading("Everyone's\nTrainer", size="9", align="right", style={"flex-grow": "1"}),
+            place_image(),
+            style={"width": "100%", "align-items": "center"}
+        ),
         introduction_text(),
         spacing="5",
+        font_family="Montserrat", 
         style={"width": "100%"},
         align="center"
     )
