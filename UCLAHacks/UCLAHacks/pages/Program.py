@@ -1,6 +1,7 @@
 from UCLAHacks.templates import ThemeState, template
 
 import reflex as rx
+import json
 
 import subprocess
 import google.generativeai as genai
@@ -52,8 +53,11 @@ class AIState(rx.State):
             "threshold": "BLOCK_MEDIUM_AND_ABOVE"
         },
         ]
+        
+        with open('../UCLAHacks/UCLAHacks/data.json', 'r') as file:
+            data = json.load(file)
 
-        system_instruction = "Personal Trainer Prompt:\n\nexample person: (Name:Harlan\tBMI:30.5 Shoulder/Hip Ratio: 1.19)\n\nWhat I need you to do is take the BMI and Shoulder/Hip Ratio of this person. With this information match the BMI to what types of workout should be given, match the Ratio to what the workout split for the week will be. The lists list what workout type should be given based off of the BMI. They also list what muscle groups should be focused based on the Shoulder/Hip Ratio. Based off this data create this 5-day workoutplan, include: exercises, sets, reps, rest time, rpe/%1rm for strength training. Return the workout plan in JSON structure. \nLike this: \n\"Day 3\": {\n      \"Muscle Groups\": \"Legs and Shoulders\",\n      \"Workout Type\": \"Cardio/Strength Focused\",\n      \"Exercises\": [\n        {\n          \"Exercise Name\": \"Back Squat\",\n          \"Sets\": 5,\n          \"Reps\": 5,\n          \"Rest Time\": \"3 minutes\",\n          \"Intensity\": \"85% 1RM\"\n        },\n\n\n\n"
+        system_instruction = "Personal Trainer Prompt:\n\nPerson: (Name:{name}\tBMI:{bmi} Shoulder/Hip Ratio: {shoulder_hip_ratio})\n\nWhat I need you to do is take the BMI and Shoulder/Hip Ratio of this person. With this information match the BMI to what types of workout should be given, match the Ratio to what the workout split for the week will be. The lists list what workout type should be given based off of the BMI. They also list what muscle groups should be focused based on the Shoulder/Hip Ratio. Based off this data create this 5-day workoutplan, include: exercises, sets, reps, rest time, rpe/%1rm for strength training. Return the workout plan in JSON structure. \nLike this: \n\"Day 3\": {\n      \"Muscle Groups\": \"Legs and Shoulders\",\n      \"Workout Type\": \"Cardio/Strength Focused\",\n      \"Exercises\": [\n        {\n          \"Exercise Name\": \"Back Squat\",\n          \"Sets\": 5,\n          \"Reps\": 5,\n          \"Rest Time\": \"3 minutes\",\n          \"Intensity\": \"85% 1RM\"\n        },\n\n\n\n"
 
         model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                                     generation_config=generation_config,
