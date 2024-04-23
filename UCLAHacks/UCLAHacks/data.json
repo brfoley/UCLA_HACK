@@ -2,10 +2,16 @@
     "name": "Brandon Foley",
     "weight": "86",
     "height": "175",
-    "age": "19",
+    "age": "21",
     "sex": "Male",
-    "shoulder_width": 86.0,
-    "hip_width": -43.5,
+    "shoulder_width": 69.5,
+    "hip_width": 45.0,
     "bmi": 28.081632653061224,
-    "shoulder_hip_ratio": -2.0
+    "shoulder_hip_ratio": 1.5333333333333334,
+    "goals": "Gain muscle",
+    "problems": "injured upper back",
+    "experince": "no experince",
+    "time": "4 days to workout",
+    "access": "gym",
+    "preference": "any"
 }

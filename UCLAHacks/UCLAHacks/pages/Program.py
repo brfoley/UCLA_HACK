@@ -4,17 +4,15 @@ import reflex as rx
 import pandas as pd
 import json
 
-import subprocess
 import google.generativeai as genai
 GOOGLE_API_KEY = "AIzaSyAFPS-aQ5MN58IEk5Y8sDmqbAtT7mRu3Hc"
 
 class AIState(rx.State):
-    def generate_program(self):
-        workout_plan = self.Generate_Prompt()
-        with open('../UCLAHacks/UCLAHacks/output.json', 'w') as f:
-            json.dump(workout_plan, f, indent=4)
+    is_program_loaded: bool = False
     
     def Generate_Prompt(self):
+        self.is_program_loaded = False
+
         """
         At the command line, only need to run once to install the package via pip:
 
@@ -31,7 +29,8 @@ class AIState(rx.State):
         $ pip install google-generativeai
         """
 
-            # Set up the model
+                
+        # Set up the model
         generation_config = {
         "temperature": 1,
         "top_p": 0.95,
@@ -58,11 +57,11 @@ class AIState(rx.State):
             "threshold": "BLOCK_MEDIUM_AND_ABOVE"
         },
         ]
-        
+
         with open('../UCLAHacks/UCLAHacks/data.json', 'r') as file:
             data = json.load(file)
-
-        system_instruction = "Personal Trainer Prompt:\n\nPerson: (Name:{name}\tBMI:{bmi} Shoulder/Hip Ratio: {shoulder_hip_ratio})\n\nWhat I need you to do is take the BMI and Shoulder/Hip Ratio of this person. With this information match the BMI to what types of workout should be given, match the Ratio to what the workout split for the week will be. The lists list what workout type should be given based off of the BMI. They also list what muscle groups should be focused based on the Shoulder/Hip Ratio. Based off this data create this 5-day workoutplan, include: exercises, sets, reps, rest time, rpe/%1rm for strength training. Return the workout plan in JSON structure. \nLike this: \n\"Day 3\": {\n      \"Muscle Groups\": \"Legs and Shoulders\",\n      \"Workout Type\": \"Cardio/Strength Focused\",\n      \"Exercises\": [\n        {\n          \"Exercise Name\": \"Back Squat\",\n          \"Sets\": 5,\n          \"Reps\": 5,\n          \"Rest Time\": \"3 minutes\",\n          \"Intensity\": \"85% 1RM\"\n        },\n\n\n\n"
+        
+        system_instruction = "Personal Trainer Prompt:\n\nexample person: (Name:Harlan    BMI:24.6 ,Shoulder/Hip Ratio: 1.19, Goals:Weight loss, Experince: beginner, time availability:  4 says to workout, equipment access: weights 15-30lbs, problems: none )\n\nWhat I need you to do is take the goals, experience, time availability, equipment access, preferred exercise modularites, problems, BMI and Shoulder/Hip Ratio of this person. Goals should be used to determine the best way to approach the schedule. for typical goals, weightloss/cutting is supposed to have more cardio, bulking/muscle gain is more strength training, etc. Experince is used as a starting point of where to start the user. Time availability should be used to incorporate rest days.  Equipment access should lead to what types of exercises they can do along with the weights that they are able to use. With the preferred exercise modularites this determines what type of exercises should be preformed, however this may not always be possible due to the goals of the user. Problems should let us know things to avoid and types of exercises to avoid at the moment or permanently depending on the problem. BMI is up to your interpretation. Shoulder/Hip ratio tells us how in shape they are and the higher it is the more \"snatched\"  or skinny they are and for most women this is the goals and this is commonly associated with goals of weightloss/cutting as well. If the number is one or under this means the person is overweight and most likely needs to lose weight. With this information determine a good workout split for this person as well as what would fit their needs best. This plan should be progressible and to be able to fulfil their goals in the long run. Based off this data create this 7-day workoutplan, include: exercises, sets, reps, rest time, rpe/%1rm for strength training. If there is a rest day at any time in the workout plan instead of making all the fields blank, please fill them with empty strings, inside exercises please fill out one of each parts with empty strings. Return the workout plan in a JSON format. it should look like as follows:\n{\n  \"Day 1\": {\n    \"Focus\": \"Upper Body Push (Strength)\",\n    \"Exercises\": [\n      {\n        \"Name\": \"Barbell Bench Press\",\n        \"Sets\": 3,\n        \"Reps\": 8,\n        \"Rest\": \"2 minutes\",\n        \"Intensity\": \"75% 1RM\" \n      },\netc..."
 
         model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                                     generation_config=generation_config,
@@ -70,62 +69,33 @@ class AIState(rx.State):
                                     safety_settings=safety_settings)
 
         prompt_parts = [
-        "muscle_groups = {\n  \"Ratio > 1.2\": \"Workout split = Back and Biceps/Chest and Triceps/Legs and Shoulders/Core \",\n  \"1.1 < Ratio < 1.2\": \"Workout split = Back/Shoulders and Arms/Legs/Chest and Core\",\n  \"Ratio < 1.1\": \"Workout split = Chest and Shoulders/Arms/Legs/Back\"\n}\n\nworkout_type = {\n  \"BMI > 25\": \"Cardio/Strength Focused\",\n  \"20 < BMI < 25\": \"Intense Workouts / Combination of Hypertrophy and Strength\",\n  \"BMI < 20\": \"Hypertrophy focused\"\n}",
+        "BMI:{bmi} \nShoulder/hip ratio:{shoulder_hip_ratio}\ngoals:{goals} \nexperience:{experince}\ntime availability:{time} \nequipment access:{access} \npreferred exercise modularites:{preference} \nproblems: {problems}",
         ]
 
         response = model.generate_content(prompt_parts)
+        print(response.text)
         
         workout_plan = json.loads(response.text)
-        # Write the JSON response to a file
-        # with open('../UCLAHacks/UCLAHacks/output.json', 'w') as f:
-        #     json.dump(workout_plan, f, indent=4)
-
-        # print("JSON response has been written to output.json file.")
-        print(workout_plan)
         
-        return workout_plan
+        with open('../UCLAHacks/UCLAHacks/output.json', 'w') as f:
+            json.dump(workout_plan, f, indent=4)
+            
+        self.is_program_loaded = True
+        
 
 @template(route="/Program", title="Program")
 def Program() -> rx.Component:
-    # Read the workout plan from the output.json file
-    with open('../UCLAHacks/UCLAHacks/output.json', 'r') as file:
-        workout_plan_list = json.load(file)
-    
-    # List to store the components for each day's workout plan
-    day_components = []
-    
-    # Convert the list of workout plans into DataFrames for each day
-    for workout_plan in workout_plan_list:
-        for day, details in workout_plan.items():
-            exercises = details['Exercises']
-            # Create a DataFrame for the exercises
-            df = pd.DataFrame(exercises)
-            # Create a table for the exercises
-            table = rx.data_table(
-                data=df,
-                pagination=True,
-                search=False,
-                sort=True
-            )
-            # Construct the title for the table (day and muscle group)
-            title = f"{day}: {details['Muscle Groups']}"
-            # Construct the component for this day's workout plan
-            day_component = rx.vstack(
-                rx.heading(title, size="5", align="center"),
-                table,
-                spacing="5",
-                style={"width": "100%"},
-                align="center",
-            )
-            # Append the day component to the list
-            day_components.append(day_component)
     
     # Return all the day components stacked vertically
     return rx.vstack(
         rx.heading("AI Program", size="6", align="center", style={"width": "100%"}),
-        rx.button("Generate Program", color_scheme="blue", on_click=AIState.generate_program),
+        rx.button("Generate Program", color_scheme="blue", on_click=AIState.Generate_Prompt),
         rx.text("Click generate program and wait around a minute for your custom workout plan!"),
-        *day_components,
+        rx.cond(
+            AIState.is_program_loaded,
+            rx.button("Click here to see program", color_scheme="blue", on_click=rx.redirect("/Schedule"))
+        ),
+        # need to output workout plan here
         spacing="5",
         style={"width": "100%"},
         align="center",

@@ -1,179 +1,217 @@
 [
     {
         "Day 1": {
-            "Muscle Groups": "Back and Biceps",
-            "Workout Type": "Cardio/Strength Focused",
+            "Focus": "Lower Body Strength",
             "Exercises": [
                 {
-                    "Exercise Name": "Barbell Deadlift",
-                    "Sets": 5,
-                    "Reps": 5,
-                    "Rest Time": "3-5 minutes",
-                    "Intensity": "80-85% 1RM"
-                },
-                {
-                    "Exercise Name": "Pull-Ups",
+                    "Name": "Barbell Back Squat",
                     "Sets": 3,
-                    "Reps": "8-12",
-                    "Rest Time": "2-3 minutes",
-                    "Intensity": "70-75% 1RM"
+                    "Reps": 8,
+                    "Rest": "90 sec",
+                    "Intensity": "70% 1RM"
                 },
                 {
-                    "Exercise Name": "Barbell Row",
-                    "Sets": 4,
-                    "Reps": "6-8",
-                    "Rest Time": "2-3 minutes",
-                    "Intensity": "75-80% 1RM"
-                },
-                {
-                    "Exercise Name": "Dumbell Bicep Curl",
+                    "Name": "Romanian Deadlift",
                     "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
+                    "Reps": 10,
+                    "Rest": "90 sec",
+                    "Intensity": "65% 1RM"
                 },
                 {
-                    "Exercise Name": "Hammer Curl",
+                    "Name": "Leg Press",
                     "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
+                    "Reps": 12,
+                    "Rest": "75 sec",
+                    "Intensity": "60% 1RM"
+                },
+                {
+                    "Name": "Walking Lunge",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest": "60 sec",
+                    "Intensity": "Bodyweight or light dumbbells"
+                },
+                {
+                    "Name": "Calf Raise",
+                    "Sets": 3,
+                    "Reps": 15,
+                    "Rest": "60 sec",
+                    "Intensity": "Bodyweight or light dumbbells"
                 }
             ]
         }
     },
     {
         "Day 2": {
-            "Muscle Groups": "Chest and Triceps",
-            "Workout Type": "Cardio/Strength Focused",
+            "Focus": "Upper Body Push (Strength)",
             "Exercises": [
                 {
-                    "Exercise Name": "Barbell Bench Press",
-                    "Sets": 5,
-                    "Reps": 5,
-                    "Rest Time": "3-5 minutes",
-                    "Intensity": "80-85% 1RM"
-                },
-                {
-                    "Exercise Name": "Incline Dumbell Press",
-                    "Sets": 4,
-                    "Reps": "6-8",
-                    "Rest Time": "2-3 minutes",
-                    "Intensity": "75-80% 1RM"
-                },
-                {
-                    "Exercise Name": "Decline Dumbell Press",
-                    "Sets": 4,
-                    "Reps": "6-8",
-                    "Rest Time": "2-3 minutes",
-                    "Intensity": "75-80% 1RM"
-                },
-                {
-                    "Exercise Name": "Tricep Pushdowns",
+                    "Name": "Barbell Bench Press",
                     "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
+                    "Reps": 8,
+                    "Rest": "90 sec",
+                    "Intensity": "70% 1RM"
                 },
                 {
-                    "Exercise Name": "Overhead Tricep Extensions",
+                    "Name": "Incline Dumbbell Press",
                     "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
+                    "Reps": 10,
+                    "Rest": "90 sec",
+                    "Intensity": "65% 1RM"
+                },
+                {
+                    "Name": "Overhead Press",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest": "75 sec",
+                    "Intensity": "60% 1RM"
+                },
+                {
+                    "Name": "Dumbbell Lateral Raise",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest": "60 sec",
+                    "Intensity": "Moderate weight"
+                },
+                {
+                    "Name": "Tricep Pushdown",
+                    "Sets": 3,
+                    "Reps": 15,
+                    "Rest": "60 sec",
+                    "Intensity": "Moderate weight"
                 }
             ]
         }
     },
     {
         "Day 3": {
-            "Muscle Groups": "Legs and Shoulders",
-            "Workout Type": "Cardio/Strength Focused",
+            "Focus": "Active Rest or Cardio",
             "Exercises": [
                 {
-                    "Exercise Name": "Back Squat",
-                    "Sets": 5,
-                    "Reps": 5,
-                    "Rest Time": "3 minutes",
-                    "Intensity": "85% 1RM"
+                    "Name": "Light jog",
+                    "Sets": "",
+                    "Reps": "30 minutes",
+                    "Rest": "",
+                    "Intensity": "Conversational pace"
                 },
                 {
-                    "Exercise Name": "Leg Press",
-                    "Sets": 4,
-                    "Reps": "6-8",
-                    "Rest Time": "2-3 minutes",
-                    "Intensity": "75-80% 1RM"
-                },
-                {
-                    "Exercise Name": "Hamstring Curls",
-                    "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
-                },
-                {
-                    "Exercise Name": "Calf Raises",
-                    "Sets": 3,
-                    "Reps": "15-20",
-                    "Rest Time": "60 seconds",
-                    "Intensity": "65-70% 1RM"
-                },
-                {
-                    "Exercise Name": "Military Press",
-                    "Sets": 5,
-                    "Reps": 5,
-                    "Rest Time": "3-5 minutes",
-                    "Intensity": "80-85% 1RM"
-                },
-                {
-                    "Exercise Name": "Lateral Raises",
-                    "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
-                },
-                {
-                    "Exercise Name": "Front Raises",
-                    "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "90 seconds",
-                    "Intensity": "70-75% 1RM"
+                    "Name": "Yoga or stretching",
+                    "Sets": "",
+                    "Reps": "30-45 minutes",
+                    "Rest": "",
+                    "Intensity": "Focus on flexibility and relaxation"
                 }
             ]
         }
     },
     {
         "Day 4": {
-            "Muscle Groups": "Core",
-            "Workout Type": "Cardio/Strength Focused",
+            "Focus": "Pull (Strength)",
             "Exercises": [
                 {
-                    "Exercise Name": "Plank",
+                    "Name": "Pull-ups (assisted if needed)",
+                    "Sets": 3,
+                    "Reps": "As many reps as possible (AMRAP)",
+                    "Rest": "90 sec",
+                    "Intensity": "Bodyweight or assisted"
+                },
+                {
+                    "Name": "Barbell Deadlift",
+                    "Sets": 3,
+                    "Reps": 5,
+                    "Rest": "2-3 minutes",
+                    "Intensity": "75% 1RM"
+                },
+                {
+                    "Name": "Seated Cable Row",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest": "90 sec",
+                    "Intensity": "65% 1RM"
+                },
+                {
+                    "Name": "Dumbbell Bicep Curl",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest": "75 sec",
+                    "Intensity": "60% 1RM"
+                },
+                {
+                    "Name": "Hammer Curl",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest": "60 sec",
+                    "Intensity": "Moderate weight"
+                }
+            ]
+        }
+    },
+    {
+        "Day 5": {
+            "Focus": "Rest or Cardio",
+            "Exercises": [
+                {
+                    "Name": "",
+                    "Sets": "",
+                    "Reps": "",
+                    "Rest": "",
+                    "Intensity": ""
+                }
+            ]
+        }
+    },
+    {
+        "Day 6": {
+            "Focus": "Full Body Circuit",
+            "Exercises": [
+                {
+                    "Name": "Burpees",
+                    "Sets": 3,
+                    "Reps": 10,
+                    "Rest": "60 sec",
+                    "Intensity": "Bodyweight"
+                },
+                {
+                    "Name": "Dumbbell Squats",
+                    "Sets": 3,
+                    "Reps": 12,
+                    "Rest": "60 sec",
+                    "Intensity": "Moderate weight"
+                },
+                {
+                    "Name": "Push-ups",
+                    "Sets": 3,
+                    "Reps": "AMRAP",
+                    "Rest": "60 sec",
+                    "Intensity": "Bodyweight or modified"
+                },
+                {
+                    "Name": "Mountain Climbers",
+                    "Sets": 3,
+                    "Reps": "30 seconds",
+                    "Rest": "60 secå",
+                    "Intensity": "Bodyweight"
+                },
+                {
+                    "Name": "Plank",
                     "Sets": 3,
                     "Reps": "30-60 seconds",
-                    "Rest Time": "60 seconds",
-                    "Intensity": "Max Effort"
-                },
+                    "Rest": "60 sec",
+                    "Intensity": "Bodyweight"
+                }
+            ]
+        }
+    },
+    {
+        "Day 7": {
+            "Focus": "Rest or Active Recovery",
+            "Exercises": [
                 {
-                    "Exercise Name": "Russian Twists",
-                    "Sets": 3,
-                    "Reps": "15-20 per side",
-                    "Rest Time": "60 seconds",
-                    "Intensity": "Max Effort"
-                },
-                {
-                    "Exercise Name": "Hanging Leg Raises",
-                    "Sets": 3,
-                    "Reps": "As many reps as possible",
-                    "Rest Time": "60 seconds",
-                    "Intensity": "Max Effort"
-                },
-                {
-                    "Exercise Name": "Ab Wheel Rollout",
-                    "Sets": 3,
-                    "Reps": "10-12",
-                    "Rest Time": "60 seconds",
-                    "Intensity": "Max Effort"
+                    "Name": "",
+                    "Sets": "",
+                    "Reps": "",
+                    "Rest": "",
+                    "Intensity": ""
                 }
             ]
         }

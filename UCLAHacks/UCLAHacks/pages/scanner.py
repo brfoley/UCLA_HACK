@@ -43,6 +43,12 @@ class InputState(rx.State):
     name: str = ""
     shoulderWidth = ""
     hipWidth = ""
+    goals = ""
+    problems = ""
+    experince = ""
+    time = ""
+    access = ""
+    preference = ""
 
     def update_height(self, value):
         self.height = value
@@ -71,6 +77,23 @@ class InputState(rx.State):
     def updateHipWidth(self,value):
         self.hipWidth = value
     
+    def updateGoals(self,value):
+        self.goals = value
+    
+    def updateProblems(self, value):
+        self.problems = value
+        
+    def updateExperince(self, value):
+        self.experince = value
+    
+    def updateTime(self, value):
+        self.time = value
+    
+    def updateAccess(self, value):
+        self.access = value
+    
+    def updatePrefrence(self, value):
+        self.preference = value
     
     def convertToJson(self):
         
@@ -111,7 +134,14 @@ class InputState(rx.State):
             "shoulder_width": self.shoulderWidth,
             "hip_width": self.hipWidth,
             "bmi": float(int(self.weight) / (pow((int(self.height) / 100),2))),
-            "shoulder_hip_ratio": (int(self.shoulderWidth)/int(self.hipWidth))
+            "shoulder_hip_ratio": (int(self.shoulderWidth)/int(self.hipWidth)),
+            "goals": self.goals,
+            "problems": self.problems,
+            "experince": self.experince,
+            "time": self.time,
+            "access": self.access,
+            "preference": self.preference,
+
         }
         
         # Convert dictionary to JSON string
@@ -128,39 +158,61 @@ def measurements():
         "padding": "0.5em",  # Reducing padding to make the text area less tall
         "text-align": "left",
     }
-    return rx.vstack(
-        rx.hstack(
-            rx.text("Name (F/L): ", align="right", width="50%"),
-            rx.text_area(placeholder="First Last", style=text_area_style, width="100%", on_change=InputState.updateName),
-            spacing="3"
+    return rx.hstack(
+        rx.vstack(
+            rx.hstack(
+                rx.text("Name : ", align="right", width="100px"),
+                rx.text_area(placeholder="First Last", style=text_area_style, width="200px", on_change=InputState.updateName),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Age (years): ", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., 30", style=text_area_style, width="200px", on_change=InputState.update_age),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Height (cm): ", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., 180", style=text_area_style, width="200px", on_change=InputState.update_height),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Weight (kg): ", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., 70", style=text_area_style, width="200px", on_change=InputState.update_weight),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Your Goals:", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., lose weight", style=text_area_style, width="200px", on_change=InputState.updateGoals),
+                spacing="3"
+            ),
         ),
-        rx.hstack(
-            rx.text("Height (cm): ", align="right", width="50%"),
-            rx.text_area(placeholder="e.g., 180", style=text_area_style, width="100%", on_change=InputState.update_height),
-            spacing="3"
+        rx.vstack(
+            rx.hstack(
+                rx.text("Any Potential Isses:", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., sprained ankle", style=text_area_style, width="200px", on_change=InputState.updateProblems),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Experince:", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., 3 years weightlifting", style=text_area_style, width="200px", on_change=InputState.updateExperince),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Time Availability (days):", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., 6 days free to workout", style=text_area_style, width="200px", on_change=InputState.updateTime),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Equipment Access:", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., weights only from 15-30lbs", style=text_area_style, width="200px", on_change=InputState.updateAccess),
+                spacing="3"
+            ),
+            rx.hstack(
+                rx.text("Preferred Exercise Modalities::", align="right", width="100px"),
+                rx.text_area(placeholder="e.g., cardio/weightlifting", style=text_area_style, width="200px", on_change=InputState.updatePrefrence),
+                spacing="3"
+            ),
         ),
-        rx.hstack(
-            rx.text("Weight (kg): ", align="right", width="50%"),
-            rx.text_area(placeholder="e.g., 70", style=text_area_style, width="100%", on_change=InputState.update_weight),
-            spacing="3"
-        ),
-        rx.hstack(
-            rx.text("Age (years): ", align="right", width="50%"),
-            rx.text_area(placeholder="e.g., 30", style=text_area_style, width="100%", on_change=InputState.update_age),
-            spacing="3"
-        ),
-    )
-
-
-def sex():
-    button_width = "100%"
-    return rx.flex(
-        rx.button(" Male ", style=button_style(InputState.sex == "Male"), width = "200px", on_click=InputState.male),
-        rx.button("Female", style=button_style(InputState.sex == "Female"), width = "200px", on_click=InputState.female),
-
-        spacing="4",
-        align_items="stretch",
-        justify_content="space-between"
     )
 
 """
@@ -180,7 +232,6 @@ def scanner() -> rx.Component:
         The UI for the scanner page.
     """
 
-    sex_section = sex()
     measurements_section = measurements()
     #upload_section = image_upload()
     camera_button = rx.link("Open Camera", href="/camera", style=button_style(False))
@@ -188,15 +239,16 @@ def scanner() -> rx.Component:
     return rx.vstack(
         rx.heading("Welcome to the Body Scanner", size="6", align="center"),
         rx.text("Please enter your measurements below:", align="center"),
-
         camera_button,
         measurements_section,
-        sex_section,
-        #upload_section,
-        
-
+        rx.hstack(
+            rx.button(" Male ", style=button_style(InputState.sex == "Male"), width = "49.5%", on_click=InputState.male),
+            rx.button("Female", style=button_style(InputState.sex == "Female"), width = "49.5%", on_click=InputState.female),
+            width="100%",
+        ),
         rx.button(
             "Submit",
+            width="100%",
             style = button_style(False),
             #color_scheme="green",
             on_click=[InputState.convertToJson, rx.window_alert(f"Saving Data: Height - {InputState.height}, Weight - {InputState.weight}, Age - {InputState.age}, Sex - {InputState.sex}"), rx.redirect("/Program")]
