@@ -5,7 +5,7 @@ import pandas as pd
 import json
 
 import google.generativeai as genai
-GOOGLE_API_KEY = "AIzaSyAFPS-aQ5MN58IEk5Y8sDmqbAtT7mRu3Hc"
+GOOGLE_API_KEY = "AIzaSyA38s3bwK_NIpK2zoIfIBSH2GkZeaUgfkM"
 
 class AIState(rx.State):
     is_program_loaded: bool = False
@@ -61,21 +61,130 @@ class AIState(rx.State):
         with open('../UCLAHacks/UCLAHacks/data.json', 'r') as file:
             data = json.load(file)
         
-        system_instruction = "Personal Trainer Prompt:\n\nexample person: (Name:Harlan    BMI:24.6 ,Shoulder/Hip Ratio: 1.19, Goals:Weight loss, Experince: beginner, time availability:  4 says to workout, equipment access: weights 15-30lbs, problems: none )\n\nWhat I need you to do is take the goals, experience, time availability, equipment access, preferred exercise modularites, problems, BMI and Shoulder/Hip Ratio of this person. Goals should be used to determine the best way to approach the schedule. for typical goals, weightloss/cutting is supposed to have more cardio, bulking/muscle gain is more strength training, etc. Experince is used as a starting point of where to start the user. Time availability should be used to incorporate rest days.  Equipment access should lead to what types of exercises they can do along with the weights that they are able to use. With the preferred exercise modularites this determines what type of exercises should be preformed, however this may not always be possible due to the goals of the user. Problems should let us know things to avoid and types of exercises to avoid at the moment or permanently depending on the problem. BMI is up to your interpretation. Shoulder/Hip ratio tells us how in shape they are and the higher it is the more \"snatched\"  or skinny they are and for most women this is the goals and this is commonly associated with goals of weightloss/cutting as well. If the number is one or under this means the person is overweight and most likely needs to lose weight. With this information determine a good workout split for this person as well as what would fit their needs best. This plan should be progressible and to be able to fulfil their goals in the long run. Based off this data create this 7-day workoutplan, include: exercises, sets, reps, rest time, rpe/%1rm for strength training. If there is a rest day at any time in the workout plan instead of making all the fields blank, please fill them with empty strings, inside exercises please fill out one of each parts with empty strings. Return the workout plan in a JSON format. it should look like as follows:\n{\n  \"Day 1\": {\n    \"Focus\": \"Upper Body Push (Strength)\",\n    \"Exercises\": [\n      {\n        \"Name\": \"Barbell Bench Press\",\n        \"Sets\": 3,\n        \"Reps\": 8,\n        \"Rest\": \"2 minutes\",\n        \"Intensity\": \"75% 1RM\" \n      },\netc..."
+            system_instruction = f"""Generate a 7-day workout plan based on the following user data:
+{{
+    "name": "{data['name']}",
+    "weight": "{data['weight']}",
+    "height": "{data['height']}",
+    "age": "{data['age']}",
+    "sex": "{data['sex']}",
+    "shoulder_width": {data['shoulder_width']},
+    "hip_width": {data['hip_width']},
+    "bmi": {data['bmi']},
+    "shoulder_hip_ratio": {data['shoulder_hip_ratio']},
+    "goals": "{data['goals']}",
+    "problems": "{data['problems']}",
+    "experience": "{data['experience']}",
+    "time": "{data['time']}",
+    "access": "{data['access']}",
+    "preference": "{data['preference']}"
+}}
+Based on this data, generate a workout plan in JSON format with the following structure:
+{{
+    "Day 1": {{
+        "Focus": "<Focus for Day 1>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }},
+    "Day 2": {{
+        "Focus": "<Focus for Day 2>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }},
+    "Day 3": {{
+        "Focus": "<Focus for Day 3>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }},
+    "Day 4": {{
+        "Focus": "<Focus for Day 4>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }},
+    "Day 5": {{
+        "Focus": "<Focus for Day 5>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }},
+    "Day 6": {{
+        "Focus": "<Focus for Day 6>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }},
+    "Day 7": {{
+        "Focus": "<Focus for Day 7>",
+        "Exercises": [
+            {{
+                "Name": "<Exercise Name>",
+                "Sets": <Number of Sets>,
+                "Reps": "<Number of Reps or Range>",
+                "Rest": "<Rest Time>",
+                "Intensity": "<Intensity Description>"
+            }}
+        ]
+    }}
+}}
+Note: Only replace the placeholders enclosed in angle brackets (e.g., <Focus for Day 1>, <Exercise Name>, etc.). Do not change the structure or remove any parts of the template.
+"""
+
+      
+
+
+
 
         model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                                     generation_config=generation_config,
                                     system_instruction=system_instruction,
                                     safety_settings=safety_settings)
 
-        prompt_parts = [
-        "BMI:{bmi} \nShoulder/hip ratio:{shoulder_hip_ratio}\ngoals:{goals} \nexperience:{experince}\ntime availability:{time} \nequipment access:{access} \npreferred exercise modularites:{preference} \nproblems: {problems}",
-        ]
-
-        response = model.generate_content(prompt_parts)
+    
+        response = model.generate_content(system_instruction)
         print(response.text)
         
         workout_plan = json.loads(response.text)
+        
         
         with open('../UCLAHacks/UCLAHacks/output.json', 'w') as f:
             json.dump(workout_plan, f, indent=4)

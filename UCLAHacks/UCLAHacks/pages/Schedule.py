@@ -5,37 +5,36 @@ import pandas as pd
 
 @template(route="/Schedule", title="Schedule")
 def Schedule() -> rx.Component:
-    # Initialize variables inside the function
+    # Load the JSON file
     with open('../UCLAHacks/UCLAHacks/output.json', 'r') as file:
-        workout_plan_list = json.load(file)
+        workout_plan = json.load(file)
 
     day_components = []
 
-    # Convert the list of workout plans into DataFrames for each day
-    for workout_plan in workout_plan_list:
-        for day, details in workout_plan.items():
-            exercises = details['Exercises']
-            # Create a DataFrame for the exercises
-            df = pd.DataFrame(exercises)
-            # Create a table for the exercises
-            table = rx.data_table(
-                data=df,
-                pagination=True,
-                search=False,
-                sort=True
-            )
-            # Construct the title for the table (day and muscle group)
-            title = f"{day}: {details['Focus']}"
-            # Construct the component for this day's workout plan
-            day_component = rx.vstack(
-                rx.heading(title, size="5", align="center"),
-                table,
-                spacing="5",
-                style={"width": "100%"},
-                align="center",
-            )
-            # Append the day component to the list
-            day_components.append(day_component)
+    # Iterate over the dictionary
+    for day, details in workout_plan.items():
+        exercises = details['Exercises']
+        # Create a DataFrame for the exercises
+        df = pd.DataFrame(exercises)
+        # Create a table for the exercises
+        table = rx.data_table(
+            data=df,
+            pagination=True,
+            search=False,
+            sort=True
+        )
+        # Construct the title for the table (day and muscle group)
+        title = f"{day}: {details['Focus']}"
+        # Construct the component for this day's workout plan
+        day_component = rx.vstack(
+            rx.heading(title, size="5", align="center"),
+            table,
+            spacing="5",
+            style={"width": "100%"},
+            align="center",
+        )
+        # Append the day component to the list
+        day_components.append(day_component)
 
     # Return the constructed components
     return rx.vstack(
